@@ -20,6 +20,7 @@ public class ProductController {
     }
 
     @GetMapping(value = "/product/search/name/{name}", produces = "application/json")
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<Product> search(@PathVariable String name){
         List<Product> products = productRepository.findByName(name);
         if(products == null){
@@ -29,6 +30,7 @@ public class ProductController {
     }
 
     @GetMapping(value = "/product/search/id/{id}", produces = "application/json")
+    @CrossOrigin(origins = "http://localhost:3000")
     public Product search(@PathVariable long id){
         Product product = productRepository.findById(id);
         if(product == null){

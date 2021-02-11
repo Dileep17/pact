@@ -1,0 +1,31 @@
+.App {
+  text-align: center;
+}
+
+.uicomponents {
+  padding: 50px;
+}
+
+input {
+  margin-right: 10px;
+}
+
+th {
+  background-color: #e69d44d4;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}

@@ -6,8 +6,6 @@ import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvide
 import au.com.dius.pact.provider.junitsupport.Provider;
 import au.com.dius.pact.provider.junitsupport.State;
 import au.com.dius.pact.provider.junitsupport.loader.PactFolder;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learning.productservice.entity.Product;
 import com.learning.productservice.model.HibernateSequence;
 import com.learning.productservice.repository.ProductRepository;
@@ -20,9 +18,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.math.BigInteger;
-import java.util.Map;
 
 @Provider("productservice")
 @ExtendWith(SpringExtension.class)
@@ -54,20 +49,17 @@ public class ContractTest {
         context.verifyInteraction();
     }
 
-    @State("product with id exist")
-    public void createProductWithId(Map<String, Object> params) throws JsonProcessingException {
-        String productJson = (String) params.get("product");
-        ObjectMapper objectMapper = new ObjectMapper();
-        Product product = objectMapper.readValue(productJson, Product.class);
-        product.setId(null);
-        productRepository.save(product);
+    @State("products does not exist")
+    public void removeProductsFromDB() {
+        productRepository.deleteAll();
     }
 
-    @State("product with id does not exist")
-    public void removeProductWithId(Map<String, Object> params) {
-        long id = ((BigInteger)params.get("id")).longValue();
-        if(productRepository.existsById(id))
-            productRepository.deleteById(id);
+    @State("products exist")
+    public void createProduct(){
+        Product someProduct = Product.builder().name("milk").variant("25 ml").price(12.12).build();
+        productRepository.save(someProduct);
+        someProduct = Product.builder().name("milk").variant("25 ml").price(12.12).build();
+        productRepository.save(someProduct);
     }
 
 }
