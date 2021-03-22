@@ -5,6 +5,8 @@ import au.com.dius.pact.provider.junit5.PactVerificationContext;
 import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvider;
 import au.com.dius.pact.provider.junitsupport.Provider;
 import au.com.dius.pact.provider.junitsupport.State;
+import au.com.dius.pact.provider.junitsupport.loader.PactBroker;
+import au.com.dius.pact.provider.junitsupport.loader.PactBrokerAuth;
 import au.com.dius.pact.provider.junitsupport.loader.PactFolder;
 import com.learning.productservice.entity.Product;
 import com.learning.productservice.model.HibernateSequence;
@@ -21,9 +23,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @Provider("productservice")
 @ExtendWith(SpringExtension.class)
-@PactFolder("pacts")
+//@PactFolder("pacts")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@PactBroker(scheme = "http", host = "localhost", port = "9292", authentication = @PactBrokerAuth(username = "webadmin", password = "password@312"))
 public class ContractTest {
 
     @LocalServerPort
@@ -41,6 +44,7 @@ public class ContractTest {
         sequenceRepository.save(HibernateSequence.builder().next_val(1).build());
         productRepository.deleteAll();
         context.setTarget(new HttpTestTarget("localhost", port, "/"));
+//        System.setProperty("pact.verifier.publishResults", "true");
     }
 
     @TestTemplate

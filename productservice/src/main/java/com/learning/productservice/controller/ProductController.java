@@ -5,7 +5,6 @@ import com.learning.productservice.entity.Product;
 import com.learning.productservice.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController

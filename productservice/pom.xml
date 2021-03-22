@@ -68,6 +68,12 @@
 				<version>2.22.2</version>
 				<configuration>
 					<useSystemClassLoader>false</useSystemClassLoader>
+					<systemPropertyVariables>
+						<pact.provider.version>1.0.004</pact.provider.version>
+						<pact.verifier.publishResults>true</pact.verifier.publishResults>
+<!--						<pact.verification.reports>json</pact.verification.reports>-->
+<!--						<pactbroker.tags>TAG</pactbroker.tags>-->
+					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 		</plugins>

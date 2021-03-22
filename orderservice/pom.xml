@@ -35,25 +35,41 @@
 		</dependency>
 		<dependency>
 			<groupId>au.com.dius.pact.consumer</groupId>
-			<artifactId>java8</artifactId>
-			<version>4.1.16</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>au.com.dius.pact.consumer</groupId>
 			<artifactId>junit5</artifactId>
 			<version>4.1.7</version>
 			<scope>test</scope>
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>au.com.dius.pact.core</groupId>-->
+<!--			<artifactId>pactbroker</artifactId>-->
+<!--			<version>4.1.16</version>-->
+<!--		</dependency>-->
 	</dependencies>
 
 	<build>
 		<plugins>
+	<!--			<plugin>-->
+	<!--				<groupId>au.com.dius</groupId>-->
+	<!--				<artifactId>pact-jvm-provider-maven</artifactId>-->
+	<!--				<version>${pact.version}</version>-->
+	<!--			</plugin>-->
+
 			<plugin>
-				<groupId>au.com.dius</groupId>
-				<artifactId>pact-jvm-provider-maven</artifactId>
-				<version>${pact.version}</version>
+				<groupId>au.com.dius.pact.provider</groupId>
+				<artifactId>maven</artifactId>
+				<version>4.1.11</version>
+				<configuration>
+					<pactDirectory>${project.build.directory}/pacts</pactDirectory> <!-- Defaults to ${project.build.directory}/pacts -->
+					<pactBrokerUrl>http://localhost:9292</pactBrokerUrl>
+					<pactBrokerUsername>webadmin</pactBrokerUsername>
+					<pactBrokerPassword>password@312</pactBrokerPassword>
+					<projectVersion>1.0.000</projectVersion> <!-- Defaults to ${project.version} -->
+<!--					<tags>-->
+<!--						<tag>feature/feature_junit5</tag>-->
+<!--					</tags>-->
+				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
