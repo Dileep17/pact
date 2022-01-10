@@ -62,3 +62,9 @@ Run `$ mvn spring-boot:run` to start service
 ### Pact broker
 
 Run `$docker-compose up` to bring up pact broker. This should be done before running pact consumer & producer tests.
+    
+    
+### Todo
+1. pact mock multiple producers in a contract test
+2. update pack broker with test results (pass/fail examples)
+3. check out https://docs.pact.io/pact_broker/can_i_deploy/
