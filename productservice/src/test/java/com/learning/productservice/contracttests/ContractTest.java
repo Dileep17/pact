@@ -26,7 +26,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 //@PactFolder("pacts")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@PactBroker(scheme = "http", host = "localhost", port = "9292", authentication = @PactBrokerAuth(username = "webadmin", password = "password@312"))
+@PactBroker(scheme = "http",
+        host = "localhost",
+        port = "9292",
+        authentication = @PactBrokerAuth(username = "webadmin", password = "password@312"))
 public class ContractTest {
 
     @LocalServerPort
@@ -44,7 +47,6 @@ public class ContractTest {
         sequenceRepository.save(HibernateSequence.builder().next_val(1).build());
         productRepository.deleteAll();
         context.setTarget(new HttpTestTarget("localhost", port, "/"));
-//        System.setProperty("pact.verifier.publishResults", "true");
     }
 
     @TestTemplate
